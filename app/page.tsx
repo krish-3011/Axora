@@ -15,6 +15,8 @@ import {
   MobileNavMenu,
 } from "./components/resizenav";
 import Services from './services/page';
+import AboutUs from './components/about';
+import Portfolio from './components/portfolio';
 
 
 export default function Landing() {
@@ -177,6 +179,9 @@ export default function Landing() {
       >
         <Services />
       </motion.div>
+      <AboutUs/>
+      <Portfolio/>
+      
     </>
   );
 }

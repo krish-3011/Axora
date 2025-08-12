@@ -20,12 +20,12 @@ const projects = [
     url: 'https://meet-engineering-6ja1.vercel.app/',
   },
   {
-    title: 'Digital Branding Kit',
+    title: 'ContriFlow',
     category: 'Brand Identity',
     description:
       'A modern and scalable brand identity kit, including logo, guidelines, and UI kit assets for startups.',
     image: '/portfolio/branding-kit.png',
-    url: 'https://example.com/branding-kit',
+    
   },
 ];
 

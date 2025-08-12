@@ -17,13 +17,14 @@ import {
 import Services from './services/page';
 import AboutUs from './components/about';
 import Portfolio from './components/portfolio';
+import Footer from './components/footer';
 
 
 export default function Landing() {
   const navItems = [
-    { name: "Features", link: "#features" },
-    { name: "Pricing", link: "#pricing" },
-    { name: "Contact", link: "#contact" },
+    { name: "About Us", link: "#About" },
+    { name: "Portfolio", link: "#portfolio" },
+    { name: "services", link: "#services" },
   ];
 
   const servicesRef = useRef(null);
@@ -60,10 +61,10 @@ export default function Landing() {
           <NavBody>
             <NavbarLogo />
             <NavItems items={navItems} />
-            <div className="flex items-center gap-4">
+            {/* <div className="flex items-center gap-4">
               <NavbarButton variant="secondary">Login</NavbarButton>
               <NavbarButton variant="primary">Book a call</NavbarButton>
-            </div>
+            </div> */}
           </NavBody>
 
           <MobileNav>
@@ -155,7 +156,11 @@ export default function Landing() {
             <button className="px-6 py-3 bg-gradient-to-r from-blue-500 to-cyan-400 text-black font-semibold rounded-2xl shadow-xl hover:scale-105 transition-transform duration-300">
               Get a Free Quote
             </button>
-            <button className="px-6 py-3 border border-white text-white rounded-2xl hover:bg-white hover:text-black transition duration-300">
+            <button 
+              onClick={() => {
+    document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' });
+  }}
+            className="px-6 py-3 border border-white text-white rounded-2xl hover:bg-white hover:text-black transition duration-300">
               View Our Work
             </button>
           </div>
@@ -171,6 +176,7 @@ export default function Landing() {
         Our Services
       </motion.h3>
 
+      <section id='services'>
       <motion.div
         ref={servicesRef}
         initial={{ opacity: 0, y: 50 }}
@@ -179,9 +185,12 @@ export default function Landing() {
       >
         <Services />
       </motion.div>
+      </section>
+      <section id='about'></section>
       <AboutUs/>
+      <section id='portfolio'></section>
       <Portfolio/>
-      
+      <Footer/>
     </>
   );
 }

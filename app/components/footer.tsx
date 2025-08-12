@@ -36,8 +36,8 @@ export default function Footer() {
         <div className="flex flex-col space-y-2 items-center md:items-start">
           <h3 className="text-white font-semibold mb-2">Contact</h3>
           <p>Email: info@axoratech.com</p>
-          <p>Phone: +91 98765 43210</p>
-          <p>Location: Ahmedabad, India</p>
+          {/* <p>Phone: +91 98765 43210</p> */}
+
         </div>
       </div>
 

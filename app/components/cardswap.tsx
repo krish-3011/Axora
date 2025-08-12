@@ -40,7 +40,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
 );
 Card.displayName = "Card";
 
-type CardRef = RefObject<HTMLDivElement>;
+type CardRef = RefObject<HTMLDivElement | null>;
 interface Slot {
   x: number;
   y: number;
@@ -108,10 +108,10 @@ const CardSwap: React.FC<CardSwapProps> = ({
     () => Children.toArray(children) as ReactElement<CardProps>[],
     [children]
   );
-  const refs = useMemo<CardRef[]>(
-    () => childArr.map(() => React.createRef<HTMLDivElement>()),
-    [childArr.length]
-  );
+const refs = useMemo<CardRef[]>(
+  () => childArr.map(() => React.createRef<HTMLDivElement>()),
+  [childArr.length]
+);
 
   const order = useRef<number[]>(
     Array.from({ length: childArr.length }, (_, i) => i)

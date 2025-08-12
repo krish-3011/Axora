@@ -40,7 +40,9 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
 );
 Card.displayName = "Card";
 
+// ✅ Allow `null` in refs for safety
 type CardRef = RefObject<HTMLDivElement | null>;
+
 interface Slot {
   x: number;
   y: number;
@@ -108,28 +110,35 @@ const CardSwap: React.FC<CardSwapProps> = ({
     () => Children.toArray(children) as ReactElement<CardProps>[],
     [children]
   );
-const refs = useMemo<CardRef[]>(
-  () => childArr.map(() => React.createRef<HTMLDivElement>()),
-  [childArr.length]
-);
+
+  // ✅ Fix 1: Allow null in refs
+  const refs = useMemo<CardRef[]>(
+    () => childArr.map(() => React.createRef<HTMLDivElement>()),
+    [childArr.length]
+  );
 
   const order = useRef<number[]>(
     Array.from({ length: childArr.length }, (_, i) => i)
   );
 
   const tlRef = useRef<gsap.core.Timeline | null>(null);
-  const intervalRef = useRef<number>();
+
+  // ✅ Fix 2: Provide initial value for interval ref
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
   const container = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const total = refs.length;
-    refs.forEach((r, i) =>
-      placeNow(
-        r.current!,
-        makeSlot(i, cardDistance, verticalDistance, total),
-        skewAmount
-      )
-    );
+    refs.forEach((r, i) => {
+      if (r.current) {
+        placeNow(
+          r.current,
+          makeSlot(i, cardDistance, verticalDistance, total),
+          skewAmount
+        );
+      }
+    });
 
     const swap = () => {
       if (order.current.length < 2) return;
@@ -200,7 +209,7 @@ const refs = useMemo<CardRef[]>(
       const node = container.current!;
       const pause = () => {
         tlRef.current?.pause();
-        clearInterval(intervalRef.current);
+        if (intervalRef.current) clearInterval(intervalRef.current);
       };
       const resume = () => {
         tlRef.current?.play();
@@ -211,10 +220,12 @@ const refs = useMemo<CardRef[]>(
       return () => {
         node.removeEventListener("mouseenter", pause);
         node.removeEventListener("mouseleave", resume);
-        clearInterval(intervalRef.current);
+        if (intervalRef.current) clearInterval(intervalRef.current);
       };
     }
-    return () => clearInterval(intervalRef.current);
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
   }, [cardDistance, verticalDistance, delay, pauseOnHover, skewAmount, easing]);
 
   const rendered = childArr.map((child, i) =>

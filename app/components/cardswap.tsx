@@ -76,12 +76,12 @@ const placeNow = (el: HTMLElement, slot: Slot, skew: number) =>
 const CardSwap: React.FC<CardSwapProps> = ({
   width = 500,
   height = 350,
-  cardDistance = 60,
+  cardDistance = 40,
   verticalDistance = 40,
   delay = 5000,
   pauseOnHover = false,
   onCardClick,
-  skewAmount = 6,
+  skewAmount = 4,
   easing = "elastic",
   children,
 }) => {

@@ -6,8 +6,8 @@ import CardSwap, { Card } from "./cardswap";
 
 export default function AboutUs() {
   return (
-    <section className="relative w-full bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950 py-12 sm:py-20 px-4 sm:px-6 lg:px-8 overflow-x-hidden">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-y-12 md:gap-y-16 gap-x-12 items-center z-10 relative">
+    <section className="relative w-full bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950 py-2 sm:py-20 px-4 sm:px-6 lg:px-8 overflow-x-hidden my-50" >
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-y-2 md:gap-y-16 gap-x-12 items-center z-10 relative">
 
         {/* Text Section (No changes here) */}
         <motion.div
@@ -29,7 +29,7 @@ export default function AboutUs() {
           <p className="mt-4 text-neutral-400 text-base leading-relaxed">
             We bring together creative design, robust development, and business insight to deliver solutions that stand out and scale up.
           </p>
-          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 text-base text-neutral-300">
+          <div className="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 text-base text-neutral-300">
             {[
               "Custom Web Development",
               "SEO & Performance",
@@ -46,7 +46,7 @@ export default function AboutUs() {
 
         {/* --- Card Section: The Final Fix --- */}
         {/* The outer div's only job is to provide a responsive container that the card stack can be centered within. */}
-        <div className="w-full min-h-[450px] lg:min-h-[550px] flex justify-center items-center">
+        <div className="w-full h-[750px] lg:min-h-[550px] flex justify-center items-center">
             {/* 1. This is our "Frame". It has a defined size and is set to relative, creating a positioning context. */}
             <div className="relative w-[320px] h-[450px] lg:w-full lg:max-w-lg lg:h-[550px]">
                 {/* 2. This is the "Content". We force it to the center of the frame. */}
